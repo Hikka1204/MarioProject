@@ -1,0 +1,20 @@
+﻿2019/06/13 12:07:38 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\光\documents\visual studio 2012\Projects\Mario\Mario.vcxproj" (Build ターゲット)。
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Sample02.cpp
+         Sample02.cpp
+     1>c:\users\光\documents\visual studio 2012\projects\mario\sample02.cpp(475): warning C4244: '+=' : 'double' から 'int' への変換です。データが失われる可能性があります。
+     1>c:\users\光\documents\visual studio 2012\projects\mario\sample02.cpp(589): warning C4244: '引数' : 'double' から 'int' への変換です。データが失われる可能性があります。
+     1>c:\users\光\documents\visual studio 2012\projects\mario\sample02.cpp(608): warning C4244: '引数' : 'double' から 'int' への変換です。データが失われる可能性があります。
+     1>c:\users\光\documents\visual studio 2012\projects\mario\sample02.cpp(609): warning C4244: '引数' : 'double' から 'int' への変換です。データが失われる可能性があります。
+     1>c:\users\光\documents\visual studio 2012\projects\mario\sample02.cpp(610): warning C4244: '引数' : 'double' から 'int' への変換です。データが失われる可能性があります。
+     1>c:\users\光\documents\visual studio 2012\projects\mario\sample02.cpp(611): warning C4244: '引数' : 'double' から 'int' への変換です。データが失われる可能性があります。
+     1>c:\users\光\documents\visual studio 2012\projects\mario\sample02.cpp(632): warning C4244: '引数' : 'double' から 'int' への変換です。データが失われる可能性があります。
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\光\documents\visual studio 2012\Projects\Mario\Debug\Mario.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\光\documents\visual studio 2012\Projects\Mario\Debug\Mario.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\光\documents\visual studio 2012\Projects\Mario\Debug\Mario.lib" /MACHINE:X86 Debug\Sample02.obj
+         Mario.vcxproj -> C:\Users\光\documents\visual studio 2012\Projects\Mario\Debug\Mario.exe
+     1>プロジェクト "C:\Users\光\documents\visual studio 2012\Projects\Mario\Mario.vcxproj" (Build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:02.07
