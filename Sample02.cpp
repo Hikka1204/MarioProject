@@ -36,7 +36,7 @@ typedef enum MUKI_STUATS{
  * 定数の宣言
  ***********************************************/
 
-const int size = 32;
+const int size = 32;		//ブロックサイズ
 const int WIDTH = 640;
 const int HEIGHT = 480;
 const int WLINE = 40;
