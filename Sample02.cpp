@@ -36,17 +36,18 @@ typedef enum MUKI_STUATS{
  * 定数の宣言
  ***********************************************/
 
-const int size = 32;
-const int WIDTH = 640;
-const int HEIGHT = 480;
-const int WLINE = 40;
-const int HLINE = 15;
-const int ENEMYMAX = 2;
-const int MarioX = 7;
-const int Font_Size_S = 16;
+const int size = 32;			//ブロックサイズ
+const int WIDTH = 640;			//画面の横
+const int HEIGHT = 480;			//画面の縦
+const int WLINE = 40;			//横のライン
+const int HLINE = 15;			//縦のライン
+const int ENEMYMAX = 2;			//敵の最大表示数
+const int MarioX = 7;			//マリオ初期位置
+const int MarioY = 0;			
+const int Font_Size_S = 16;		//フォントサイズ
 const int Font_Size_M = 32;
 const int Font_Size_L = 64;
-const int BlockHitX = 5;
+const int BlockHitX = 5;		//当たり判定用
 
 
 /***********************************************
