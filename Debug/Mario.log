@@ -1,4 +1,4 @@
-﻿2019/06/13 12:07:38 にビルドを開始しました。
+﻿2019/06/13 15:59:48 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\光\documents\visual studio 2012\Projects\Mario\Mario.vcxproj" (Build ターゲット)。
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用" /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Sample02.cpp
@@ -17,4 +17,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:02.07
+経過時間 00:00:06.00
