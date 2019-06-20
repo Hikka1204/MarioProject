@@ -39,15 +39,17 @@ typedef enum MUKI_STUATS{
 const int size = 32;		//ブロックサイズ
 const int WIDTH = 640;
 const int HEIGHT = 480;
-const int WLINE = 230;//40;
+const int WLINE = 230; //40;
 const int HLINE = 15;
 const int ENEMYMAX = 2;
 const int MarioX = 7;
 const int Font_Size_S = 16;
 const int Font_Size_M = 32;
 const int Font_Size_L = 64;
-const int BlockHitX = 5;
-
+const int BlockHitXH = 5;
+const int BlockHitYH = 30;
+const int BlockHitXW = 26;
+const int BlockHitYW = 1;
 
 /***********************************************
  * 変数の宣言
@@ -79,6 +81,7 @@ int g_GameOver;		//ゲームオーバーの数
 int g_GameClear;		//ゲームクリアの数
 
 
+
 int g_animecount;		//ゲームのカウント
 
 int g_BlockMx;		//ブロックの横の移動量
@@ -103,8 +106,6 @@ struct s_BLOCK {
 };
 struct s_BLOCK g_Block[HLINE][WLINE]; 
 
-//int g_IntBlock[HLINE*WLINE];
-
 int g_IntBlock[HLINE][WLINE] = 
 {{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
 {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,19,20,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,19,20,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,19,20,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},
@@ -122,7 +123,23 @@ int g_IntBlock[HLINE][WLINE] =
 {7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,-1,-1,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,-1,-1,-1,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,-1,-1,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
 {7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,-1,-1,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,-1,-1,-1,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,-1,-1,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7}};
 
+//int g_IntBlock[HLINE][WLINE] =
+//{{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,48,75},
+//{-1,-1,-1,6,6,6,6,6,6,6,-1,-1,-1,-1,48,75},
+//{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,48,75},
+//{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,48,75},
+//{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,48,75},
+//{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,48,75},
+//{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,48,75},
+//{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,48,75},
+//{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,48,75},
+//{-1,-1,-1,6,6,6,6,6,6,6,-1,-1,-1,-1,48,75},
+//{-1,-1,-1,6,6,6,6,6,6,6,-1,-1,60,61,62,63},
+//{-1,-1,-1,6,6,6,6,6,6,6,-1,-1,72,73,74,75},
+//{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7},
+//{7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7}};
 
+int g_NoHitImage[23] = {14,15,16,17,18,19,20,21,22,23,30,31,32,33,34,35,42,43,44,45,46,47,59};
  
 struct s_PLAYER{
 	int flg;		//	0.無 1.メイン 2.当たり 3.パワー
@@ -213,7 +230,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		g_PushFlg = FALSE;
 
 		ClearDrawScreen(); // 画面の初期化
-
+		SetBackgroundColor( 95, 151, 255 ) ;
 
 		switch (g_GameState){
 			case GAME_TITLE:
@@ -292,6 +309,7 @@ void DrawGameTitle(void)
  ***********************************************/
 void GameInit(void)
 {
+	
 	// ゲームメイン処理へ
 	g_GameState = GAME_MAIN;
 
@@ -495,8 +513,8 @@ void PlayerMove(void)
 		g_Player.x = 0;
 		g_Player.mx = 0;
 	}
-	if(g_Player.x+32 > WIDTH){
-		g_Player.x = WIDTH-32;
+	if(g_Player.x+size > WIDTH){
+		g_Player.x = WIDTH-size;
 		g_Player.mx= 0;
 	}
 
@@ -586,21 +604,36 @@ void BlockMove(void)
  ***********************************************/
 void HitBox(void)
 {
-	
+	int flg = 0;
+
 	for(int h = 0; h < HLINE; h++){
 		for(int w = 0; w < WLINE; w++){
 			if(g_Block[h][w].flg == TRUE && g_Block[h][w].image != MITI){
-				//ブロックの上部（ピンク色）
-				BlockHitUp(h , w);
+				
+				//当たり判定が必要のないimageの判定　flg 0:なし 1:ある
+				for(int i = 0; i < 23; i++){
+					if(g_NoHitImage[i] == g_Block[h][w].image){
+						flg = 1;
+						break;
+					}
+				}
+				
+				//判定の中でflgが0なら判定する
+				if(flg == 0){
+					//ブロックの上部（ピンク色）
+					BlockHitUp(h , w);
 
-				//ブロックの下部（ピンク色）
-				BlockHitDown(h , w);
+					//ブロックの下部（ピンク色）
+					BlockHitDown(h , w);
 				
-				//ブロックの右部(青）
-				BlockHitRight(h , w);
+					//ブロックの右部(青）
+					BlockHitRight(h , w);
 				
-				//ブロックの左部(青）
-				BlockHitLeft(h , w);
+					//ブロックの左部(青）
+					BlockHitLeft(h , w);
+				}
+
+				flg = 0;
 				
 			}
 			DrawBox(g_Player.x , g_Player.y,g_Player.x+size,g_Player.y + size,0xff00ff,TRUE);
@@ -615,8 +648,8 @@ void HitBox(void)
  ***********************************************/
 void BlockHitUp(int h, int w)
 {
-	if(g_Player.x < g_Block[h][w].x+size - 5 - g_BlockMx && g_Block[h][w].x + 5 - g_BlockMx < g_Player.x + size && 
-			g_Player.y < g_Block[h][w].y + size - 30 && g_Block[h][w].y < g_Player.y + size){
+	if(g_Player.x < g_Block[h][w].x+size - BlockHitXH - g_BlockMx && g_Block[h][w].x + BlockHitXH - g_BlockMx < g_Player.x + size && 
+			g_Player.y < g_Block[h][w].y + size - BlockHitYH && g_Block[h][w].y < g_Player.y + size){
 		g_Player.y = g_Block[h][w].y - size;
 		g_Player.my = 0;
 		if(g_NowKey & PAD_INPUT_UP) g_Player.JumpFlag = TRUE;
@@ -628,8 +661,8 @@ void BlockHitUp(int h, int w)
 
 void BlockHitDown(int h, int w)
 {
-	if(g_Player.x < g_Block[h][w].x + size - 5 - g_BlockMx && g_Block[h][w].x + 5 - g_BlockMx < g_Player.x+size 
-			&& g_Player.y < g_Block[h][w].y + size && g_Block[h][w].y+30 < g_Player.y+size){
+	if(g_Player.x < g_Block[h][w].x + size - BlockHitXH - g_BlockMx && g_Block[h][w].x + BlockHitXH - g_BlockMx < g_Player.x+size 
+			&& g_Player.y < g_Block[h][w].y + size && g_Block[h][w].y + BlockHitYH < g_Player.y+size){
 		g_Player.y = g_Block[h][w].y+size;
 		g_Player.my = 0;
 		g_Player.JumpFlag = FALSE;
@@ -640,9 +673,8 @@ void BlockHitDown(int h, int w)
 
 void BlockHitRight(int h, int w)
 {
-	if(g_Player.x < g_Block[h][w].x + size-26 - g_BlockMx && g_Block[h][w].x + 4 - g_BlockMx < g_Player.x+size 
-			&& g_Player.y < g_Block[h][w].y+size-1 && g_Block[h][w].y+1 < g_Player.y+size){
-		g_Player.mx = 0;
+	if(g_Player.x < g_Block[h][w].x + size - BlockHitXW - g_BlockMx && g_Block[h][w].x - g_BlockMx < g_Player.x+size 
+			&& g_Player.y < g_Block[h][w].y+size - BlockHitYW && g_Block[h][w].y + BlockHitYW < g_Player.y+size){
 		g_Player.x = g_Block[h][w].x-size - g_BlockMx;
 		return ;
 	}
@@ -650,9 +682,8 @@ void BlockHitRight(int h, int w)
 
 void BlockHitLeft(int h, int w)
 {
-	if(g_Player.x < g_Block[h][w].x+size - 4 - g_BlockMx&& g_Block[h][w].x + 26 - g_BlockMx< g_Player.x+size 
-					&& g_Player.y < g_Block[h][w].y+size-1 && g_Block[h][w].y+1 < g_Player.y+size){
-			g_Player.mx = 0;
+	if(g_Player.x < g_Block[h][w].x+size - g_BlockMx&& g_Block[h][w].x + BlockHitXW - g_BlockMx< g_Player.x+size 
+					&& g_Player.y < g_Block[h][w].y+size - BlockHitYW && g_Block[h][w].y + BlockHitYW < g_Player.y+size){
 			g_Player.x = g_Block[h][w].x+size - g_BlockMx;
 		return ;
 	}
@@ -665,26 +696,30 @@ void BlockHitLeft(int h, int w)
  ***********************************************/
 void DrawStage(void)
 {
+	int flg = 0;
+	
 	for(int h = 0; h < HLINE; h++){
 		for(int w = 0; w < WLINE; w++){
 			if(g_Block[h][w].flg == TRUE && g_Block[h][w].image != -1){
+
+				//当たり判定が必要のないimageの判定　flg 0:なし 1:ある
+				for(int i = 0; i < 23; i++){
+					if(g_NoHitImage[i] == g_Block[h][w].image){
+						flg = 1;
+						break;
+					}
+				}
+
 				DrawGraph(g_Block[h][w].x - g_BlockMx ,g_Block[h][w].y,g_BlockImage[g_Block[h][w].image],TRUE);
-				//switch(g_Block[h][w].image){
-				//	DrawBox(w * size-g_BlockMx,h * size, (w + 1) * size-g_BlockMx,(h + 1) * size,0xff7f50,TRUE);
-				//	case KABE:
-						//DrawBox(w * size-g_BlockMx,h * size, (w + 1) * size-g_BlockMx,(h + 1) * size,0xff7f50,TRUE);
-				DrawBox(g_Block[h][w].x+5 - g_BlockMx ,g_Block[h][w].y,   g_Block[h][w].x+size-5 - g_BlockMx, g_Block[h][w].y+size-30,0xff00ff,TRUE); //上当たり判定描画
-				DrawBox(g_Block[h][w].x+5 - g_BlockMx ,g_Block[h][w].y+30,g_Block[h][w].x+size-5 - g_BlockMx, g_Block[h][w].y+size,   0xff00ff,TRUE); //下当たり判定描画
-				DrawBox(g_Block[h][w].x+4 - g_BlockMx, g_Block[h][w].y+1, g_Block[h][w].x+size-26- g_BlockMx, g_Block[h][w].y+size-1, 0x00FFFF,TRUE);//右
-				DrawBox(g_Block[h][w].x+26- g_BlockMx, g_Block[h][w].y+1, g_Block[h][w].x+size-4 - g_BlockMx, g_Block[h][w].y+size-1, 0x00FFFF,TRUE);//左
-				//		break;
-				//	case BLOCK:
-				//		DrawBox(w * size,h * size, (w + 1) * size,(h + 1) * size,0xffa500,TRUE);
-				//		break;
-				//	default:
-				//		DrawBox(w * size,h * size, (w + 1) * size,(h + 1) * size,0xffffff,FALSE);
-				//		break;
-				//}
+				if(flg == 0){
+				DrawBox(g_Block[h][w].x + BlockHitXH - g_BlockMx ,g_Block[h][w].y,   g_Block[h][w].x+size- BlockHitXH - g_BlockMx, g_Block[h][w].y + size- BlockHitYH,0xff00ff,TRUE); //上当たり判定描画
+				DrawBox(g_Block[h][w].x + BlockHitXH - g_BlockMx ,g_Block[h][w].y + BlockHitYH,g_Block[h][w].x+size- BlockHitXH - g_BlockMx, g_Block[h][w].y+size,   0xff00ff,TRUE); //下当たり判定描画
+				DrawBox(g_Block[h][w].x - g_BlockMx, g_Block[h][w].y + BlockHitYW, g_Block[h][w].x+size - BlockHitXW - g_BlockMx, g_Block[h][w].y+size - BlockHitYW, 0x00FFFF,TRUE);//右
+				DrawBox(g_Block[h][w].x + BlockHitXW - g_BlockMx, g_Block[h][w].y + BlockHitYW, g_Block[h][w].x + size - g_BlockMx, g_Block[h][w].y+size - BlockHitYW, 0x00FFFF,TRUE);//左
+				}
+				//DrawFormatString(g_Block[h][w].x - g_BlockMx ,g_Block[h][w].y,0x000000,"%d",g_Block[h][w].image);
+
+				flg = 0;
 			}
 		}
 	}
